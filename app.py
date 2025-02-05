@@ -7,11 +7,13 @@ import openai
 # Set your OpenAI API key
 openai.api_key = st.secrets["mykey"] 
 
-openai.api_key =  st.secrets["mykey"]
 df = pd.read_csv("qa_dataset_with_embeddings.csv")
 
 # Convert the string embeddings back to lists
 df['Question_Embedding'] = df['Question_Embedding'].apply(ast.literal_eval)
+
+def get_embedding(text, model="text-embedding-ada-002"):
+   return openai.Embedding.create(input = [text], model=model)['data'][0]['embedding']
 
 def find_best_answer(user_question):
    # Get embedding for the user's question
@@ -34,30 +36,17 @@ def find_best_answer(user_question):
       return "I apologize, but I don't have information on that topic yet. Could you please ask other questions?"
 
 
+# Streamlit Interface
+st.title("Smart FAQ Assistant (Heart, Lung, Blood Health)")
 
+user_question = st.text_input("Ask a question","Who will have Cardiomyopathy?")
+search_button = st.button("Find Answer")
 
-st.text_input("First name")
-
-# Streamlit UI
-st.title("Smart FAQ Assistant ")
-question = st.text_input("Question")
-
-
-if st.button("Trigger the answer"):
-    caption, image_description = generate_copy(product_name, selected_features, selected_benefits, selected_audience, selected_pain_points, selected_desires, selected_channel, selected_tone)
-    st.subheader("Answer:")
-    st.text_area(st.write(generate_copy(question)))
-    
-
-def generate_copy(question):
-    prompt = f"""
-    **Your question:** {question}
-
-    **Your answer:** find_best_answer(question)
-    """
-   
-    return prompt
-
-
-
-
+if search_button:
+    if not user_question:
+        st.warning("Please enter a question.")
+    else:
+        with st.spinner("Searching for the best answer..."):  # Display a spinner while searching
+            answer = find_best_answer(user_question)
+            st.write("## Answer:")
+            st.write(answer)
