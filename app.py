@@ -2,7 +2,7 @@ import streamlit as st
 import ast
 import pandas as pd
 import openai
-import matplotlib
+import matplotlib.pyplot as plt
 from openai.embeddings_utils import cosine_similarity
 
 openai.api_key =  st.secrets["mykey"]
