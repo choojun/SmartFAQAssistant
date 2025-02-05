@@ -1,4 +1,4 @@
-**#Building a Smart FAQ Assistant with Streamlit & Embedding**
+**Building a Smart FAQ Assistant with Streamlit & Embedding**
 
 **Goal:**
 
