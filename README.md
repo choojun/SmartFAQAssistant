@@ -1,3 +1,5 @@
+*Building a Smart FAQ Assistant with Streamlit & Embeddings*
+
 **Goal:**
 
 Create a Streamlit web application that allows users to ask questions about heart, lung, and blood-related health topics. The app will use the provided [`qa_dataset_with_embeddings.csv`](https://drive.google.com/file/d/1g6DaU_WcdlHFYlSoeVqEzyFVq05IiKQq/view?usp=drive_link) dataset, its corresponding embeddings (`Question_Embedding` column), and an appropriate embedding model to find the most relevant answer.
