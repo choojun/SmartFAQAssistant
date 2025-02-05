@@ -1,7 +1,8 @@
-
-
-
+import streamlit as st
+import openai
 import ast
+
+
 df = pd.read_csv("qa_dataset_with_embeddings.csv")
 
 # Convert the string embeddings back to lists
@@ -26,6 +27,31 @@ def find_best_answer(user_question):
       return best_answer
    else:
       return "I apologize, but I don't have information on that topic yet. Could you please ask other questions?"
+
+
+
+
+st.text_input("First name")
+
+# Streamlit UI
+st.title("Smart FAQ Assistant ")
+question = st.text_input("Question")
+
+
+if st.button("Trigger the answer"):
+    caption, image_description = generate_copy(product_name, selected_features, selected_benefits, selected_audience, selected_pain_points, selected_desires, selected_channel, selected_tone)
+    st.subheader("Answer:")
+    st.text_area(st.write(generate_copy(question)))
+    
+
+def generate_copy(question):
+    prompt = f"""
+    **Your question:** {question}
+
+    **Your answer:** find_best_answer(question)
+    """
+   
+    return prompt
 
 
 
